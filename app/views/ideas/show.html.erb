@@ -1,0 +1,81 @@
+<style type="text/css">
+	.brand-logo{
+		font-family: cursive;
+	}
+
+	.logout{
+		margin: 15px;
+	}
+
+	.table{
+		margin: 15px;
+		
+	}
+
+	.idea {
+		margin: 15px;
+		
+	}
+</style>
+
+<div class="navbar-fixed">
+    <nav>
+
+	      <div class="nav-wrapper purple lighten-1">
+	        <a href="/ideas" class="brand-logo center !important">Effulgent Ideas</a>
+	        
+		        <div class="row">
+			        <form action='/sessions' method='post'>
+					
+					  <input type='hidden' name='authenticity_token' value='<%= form_authenticity_token %>'>
+
+					   <input type='hidden' name='_method' value='delete'>
+
+					  <input type="submit" class="logout right !important btn purple darken-4" value ="Log Out">
+					</form>
+				</div>
+	      </div>
+
+    </nav>
+    
+ </div>
+
+ <nav>
+    <div class="nav-wrapper deep-purple lighten-1">
+    	<h4 class="brand-logo">Hi,  <%= @currentuser.name %>!</h4>
+		
+    </div>
+  </nav>
+
+<div class="idea row">
+	<div class ="card centered !important col s12 m6 l8">
+    <div class=" ">
+        <div class="center !important card-panel hoverable purple lighten-1">
+			<p class="center !important white-text">People who liked, " <%= @idea.content %> "</p>
+		</div>
+    </div>
+    </div>
+</div>
+
+<div class="table row col s12 m6 l8">
+
+<table class="hoverable responsive-table centered col s6 m4">
+        <thead>
+          <tr>
+              <th data-field="id">Alias</th>
+              <th data-field="name">Name</th>
+          </tr>
+        </thead>
+
+        <tbody>
+        	<% @members.each do |user| %>
+          <tr>
+            <td><a href= "/users/<%= user.id %>"><%= user.alias %></td>
+            <td><%= user.name %></td>
+          </tr>
+          <%end%>
+        </tbody>
+</table>
+</div>
+
+

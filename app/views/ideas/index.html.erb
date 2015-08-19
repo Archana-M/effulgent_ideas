@@ -1,0 +1,156 @@
+<style type="text/css">
+	.brand-logo{
+		font-family: cursive;
+	}
+	/*.logout{
+		margin-left: 200px;
+	}
+*/
+	
+
+	.logout{
+		margin: 15px;
+
+	}
+
+	.dropdown-button{
+		margin: 15px;
+	}
+
+	.vote{
+		margin: 10px;
+	}
+
+	.ideas{
+		margin: 10px;
+	}
+
+
+
+</style>
+	<!-- ****** END OF STYLE SHEET ****** -->
+
+	<!-- ****** STARTING FIRST NAV BAR ****** -->
+
+<div class="navbar-fixed">
+    <nav>
+
+	      <div class="nav-wrapper purple lighten-1">
+	        <a href="/ideas" class="brand-logo center !important">Effulgent Ideas</a>
+	        
+		        <div class="row">
+			        <form action='/sessions' method='post'>
+					
+					  <input type='hidden' name='authenticity_token' value='<%= form_authenticity_token %>'>
+
+					   <input type='hidden' name='_method' value='delete'>
+
+					  <input type="submit" class="logout right !important btn purple darken-4" value ="Log Out">
+					</form>
+				</div>
+	      </div>
+
+    </nav>
+    
+ </div>
+
+	 <!-- ****** ENDING FIRST NAV BAR ****** -->
+
+	 <!-- ****** STARTING SECOND NAV BAR ****** -->
+
+ <nav>
+    <div class="nav-wrapper deep-purple lighten-1">
+    	<h4 class="brand-logo">Hi, <%= @user.name %>!</h4>
+      <!-- Dropdown Trigger -->
+		<a class='dropdown-button btn indigo darken-4 right !important data-outduration="true"' href='#' data-activates='dropdown1'>Sort By</a>
+		  <!-- Dropdown Structure -->
+		  <ul id='dropdown1' class='dropdown-content indigo darken-4-text'>
+		    <li><a href="?sort=votes">Max Votes</a></li>
+		    <li class="divider"></li>
+		    <li><a href="/ideas">New to Old</a></li>
+		    <li class="divider"></li>
+		    <li><a href="?sort=old">Old to New</a></li>
+		  </ul>
+    </div>
+  </nav>
+
+	<!-- ****** ENDING SECOND NAV BAR ****** -->
+
+	<!-- ****** STARTING NEW IDEA FORM ****** -->
+
+<div class="row">
+	    <form class="col s12" action="/ideas" method="post">
+	    	<input name="authenticity_token" value="<%= form_authenticity_token %>" type="hidden">
+			<input type = 'hidden' name ='user_id' value = "<%= @user.id %>">
+			    <div class="row">
+			        <div class="input-field col s8">
+			          <textarea type="text" name="content"id="textarea1" class="materialize-textarea"></textarea>
+			          <label for="textarea1">New idea</label>
+			          <input class ="btn purple" type = "submit" id="submit" value= "Idea!">
+			        </div>
+
+			    </div>
+	    </form>
+</div>
+
+	<!-- ****** ENDING NEW IDEA FORM ****** -->
+
+	<!-- ****** STARTING IDEAS DISPLAY ****** -->
+
+
+<div class="row">
+    <div class="ideas col s12">
+        
+				<% @idea.each do |idea| %>
+		  		
+					<p class ="black-text">
+				
+						<%= idea.content %></p>
+				
+
+							<% if current_user == idea.user %>
+							  	<form action = "/ideas/<%= idea.id %>" method='post'>
+								 	<input type="hidden" name="_method" value="delete">
+
+								 	<input name="authenticity_token" value="<%= form_authenticity_token %>" type="hidden">
+
+								 	
+								 	<input class='right !important btn-small red lighten-1 white-text' type ="submit" id ="Delete" value="Delete Your Idea">
+								</form>
+							<%end%>
+
+						<p>Author: <a class="" href= "/users/<%= @user.id %>"><%= idea.user.name %></a> ,on: <%= l idea.created_at, format: :long %></p>
+						<div class="vote ">
+							<a href= "/ideas/<%= idea.id %>"><%= idea.likes.count %> Likes </a>
+
+								<% if  @likes.include? idea %>
+									<form action='/likes/<%= idea.id %>' method='post'>
+									    <input type='hidden' name='authenticity_token' value='<%= form_authenticity_token %>'>
+									   <input type='hidden' name='_method' value='delete'>
+									    <input class= "btn-small grey lighten-2" type='submit' value='UnLike'>
+								  	</form>
+
+								<% else %>
+									<form action='/likes' method='post'>
+									    <input type='hidden' name='authenticity_token' value='<%= form_authenticity_token %>'>
+									    <input type='hidden' name='idea_id' value='<%= idea.id %>'>
+									    <input class ='btn-small purple white-text' type='submit' value='L i k e'>
+									 </form>
+								
+								<% end %>
+						</div>
+
+			          <div class="divider teal col s12"></div>
+						
+					
+
+				<% end %>
+
+			</div>
+				
+</div>
+
+	<!-- ****** ENDING IDEAS DISPLAY ****** -->
+
+</form>
+</div>

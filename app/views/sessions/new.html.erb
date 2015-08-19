@@ -1,0 +1,119 @@
+<style type="text/css">
+	.brand-logo{
+		font-family: cursive;
+	}
+
+	.error{
+		color: red;
+	}
+
+</style>
+
+
+<div class="navbar-fixed">
+    <nav>
+      <div class="nav-wrapper purple lighten-1">
+        <a href="" class="center !important brand-logo center-align">Effulgent Ideas</a>
+      </div>
+    </nav>
+</div>
+ 
+<div class = "row">
+	<div class="col s12 m4 l4">
+
+	    <form action="/users" method="post">
+	    <input name="authenticity_token" value="<%= form_authenticity_token %>" type="hidden">
+
+	    <h5 class="purple-text">Sign Up</h5>
+
+	      <div class="row">
+	        <div class=".input-field s6 m4">
+	        	<label class =" cyan-text text-accent-4" for="name">Name</label>
+		        <input type="text" id="name" name="user[name]" class="validate">
+		         
+	        </div>
+	       </div>
+
+	       <div class="row">
+	        <div class=".input-field s6 m4">
+	        	<label class ="cyan-text text-accent-4" for="alias">Alias</label>
+		      	<input id="alias" type="text" id="alias" name="user[alias]" class="validate">
+		          
+	        </div>
+	      </div>
+	      
+	      <div class="row">
+	        <div class=".input-field s6 m4">
+	        	<label class ="cyan-text text-accent-4" for="email">Email</label>
+		        <input type="email" id="email" name="user[email]" class="validate">
+		          
+	        </div>
+	      </div>
+
+
+	      <div class="row">
+	        <div class=".input-field  s12 m4">
+	        	<label class ="cyan-text text-accent-4" for="password">Password</label>
+		        <input type="password" id="password" name="user[password]" class="validate">
+		          
+	        </div>
+	      </div>
+
+	      <div class="row">
+	        <div class=".input-field  s12 m4">
+	        	<label class ="cyan-text text-accent-4" for="password">Confirm Password</label>
+		        <input type="password" id="confirm_password" name="user[password_confirmation]" class="validate">
+		          
+	        </div>
+	      </div>
+
+			<input class="btn purple darken-3" type = "submit" id="submit" value= "Sign Up">
+
+			 <% if flash[:regerrors] %>
+			<% flash[:regerrors].each do |error| %>
+			<p class="error"><%= error %><p>
+			<% end %>
+			<% end %>
+
+	    </form>
+	</div>
+
+
+	<div class=" col s12 m4 l4">
+
+		<form action = "/sessions" method="post">
+			<input name="authenticity_token" value="<%= form_authenticity_token %>" type="hidden">
+
+			<h5 class="purple-text">Log In</h5>
+
+			<div class="row">
+		        <div class=".input-field  s12 m4">
+		        	<label class ="cyan-text text-accent-4" for="email">Email</label>
+					<input id="Email" type = "Email" name="user[email]" class="validate">
+					
+				</div>
+			</div>
+
+			<div class="row">
+				<div class=".input-field s12 m4">
+					<label class ="cyan-text text-accent-4" length="8" for="password">Password</label>
+					<input id="Password" type = "Password" name="user[password]" class="validate">
+					
+				</div>
+			</div>
+
+				
+				<input class="btn purple darken-3" type='submit' value='Log In'>
+
+				<% if  flash[:errors] %>
+					<% flash[:errors].each do |error| %>
+						<p class="error"><%= error %><p>
+						<%end%>
+						<%end%>
+		</form>
+
+
+	</div>
+
+</div>
+
