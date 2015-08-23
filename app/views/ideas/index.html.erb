@@ -115,7 +115,7 @@
 								 	<input name="authenticity_token" value="<%= form_authenticity_token %>" type="hidden">
 
 								 	
-								 	<input class='right !important btn-small red lighten-1 white-text' type ="submit" id ="Delete" value="Delete Your Idea">
+								 	<input class='right !important btn red lighten-1' type ="submit" id ="Delete" value="Delete Your Idea">
 								</form>
 							<%end%>
 
@@ -127,14 +127,14 @@
 									<form action='/likes/<%= idea.id %>' method='post'>
 									    <input type='hidden' name='authenticity_token' value='<%= form_authenticity_token %>'>
 									   <input type='hidden' name='_method' value='delete'>
-									    <input class= "btn-small grey lighten-2" type='submit' value='UnLike'>
+									    <input class= "btn grey lighten-2" type='submit' value='UnLike'>
 								  	</form>
 
 								<% else %>
 									<form action='/likes' method='post'>
 									    <input type='hidden' name='authenticity_token' value='<%= form_authenticity_token %>'>
 									    <input type='hidden' name='idea_id' value='<%= idea.id %>'>
-									    <input class ='btn-small purple white-text' type='submit' value='L i k e'>
+									    <input class ='btn purple' type='submit' value='Like'>
 									 </form>
 								
 								<% end %>

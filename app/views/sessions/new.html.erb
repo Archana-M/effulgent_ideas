@@ -7,6 +7,10 @@
 		color: red;
 	}
 
+	.demo{
+		color: grey;
+		}
+
 </style>
 
 
@@ -102,7 +106,7 @@
 				</div>
 			</div>
 
-				
+				<p class="demo"><i>demo user: demo@gmail.com, password: pass1234</i></p>
 				<input class="btn purple darken-3" type='submit' value='Log In'>
 
 				<% if  flash[:errors] %>
@@ -111,6 +115,8 @@
 						<%end%>
 						<%end%>
 		</form>
+
+
 
 
 	</div>
